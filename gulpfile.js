@@ -3,7 +3,7 @@ var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var prefix      = require('gulp-autoprefixer');
 var cp          = require('child_process');
-var jade          = require('gulp-jade');
+var jade        = require('gulp-jade');
 
 var jekyll   = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
 var messages = {
@@ -67,11 +67,13 @@ gulp.task('sass', function () {
  * Watch scss files for changes & recompile
  * Watch html/md files, run jekyll & reload BrowserSync
  */
-gulp.task('watch', function () {
-    gulp.watch('assets/css/**', ['sass']);
-    gulp.watch(['*.html', '_layouts/*.html', '_includes/*'], ['jekyll-rebuild']);
-    gulp.watch('_jadefiles/*.jade', ['jade']);
-});
+ gulp.task('watch', function () {
+     gulp.watch('assets/css/**', ['sass']);
+     gulp.watch('assets/js/**', ['jekyll-rebuild']);
+     gulp.watch(['index.html', '_layouts/*.html', '_includes/*'], ['jekyll-rebuild']);
+     gulp.watch(['assets/js/**'], ['jekyll-rebuild']);
+     gulp.watch('_jadefiles/*.jade', ['jade']);
+ });
 
 /**
  * Default task, running just `gulp` will compile the sass,
